@@ -3,6 +3,7 @@
 pragma solidity >=0.8.13 <0.9.0;
 
 import "@fhenixprotocol/contracts/FHE.sol";
+import "@fhenixprotocol/contracts/access/Permissioned.sol";
 
 contract Lottery {
   euint8 private winningNumber;
@@ -67,10 +68,10 @@ contract Lottery {
   }
 
   function checkRewards(
-    bytes32 publicKey
+    Permission memory signature
   ) public view onlyAfterEnd returns (string memory) {
     // check if I have rewards
-    return FHE.sealoutput(rewards[msg.sender], publicKey);
+    return FHE.sealoutput(rewards[msg.sender], signature.publicKey);
   }
 
   function redeemRewards() public onlyAfterEnd {
