@@ -68,7 +68,7 @@ contract Lottery {
 
   function checkRewards(
     bytes32 publicKey
-  ) public view onlyAfterEnd returns (bytes memory) {
+  ) public view onlyAfterEnd returns (string memory) {
     // check if I have rewards
     return FHE.sealoutput(rewards[msg.sender], publicKey);
   }
